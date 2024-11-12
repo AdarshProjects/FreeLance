@@ -1,5 +1,4 @@
-
-export default function Userpanel(){
+export default function User_panel() {
     return (
         <>
             <div className="flex justify-between p-2">
@@ -57,25 +56,25 @@ export default function Userpanel(){
             <div className="p-3 grid grid-cols-2 gap-3">
             <div className="w-auto p-6 rounded-lg flex shadow-2xl shadow-sky-200 mt-9">
                     <div className="w-40 h-40 bg-slate-300 rounded-full mt-6">
-                        <p className="text-7xl flex items-center justify-center translate-y-8">R</p>
+                        <p className="text-7xl flex items-center justify-center translate-y-10">R</p>
                     </div>
-                    <div className="ml-14 w-72">
-                        <p className="text-4xl font-semibold">Dr. Raghu Datta</p>
+                    <div className="ml-14 w-72 text-left">
+                        <p className="text-4xl font-semibold ">Dr. Raghu Datta</p>
                         <div><span className="font-semibold text-xl">Address-</span>HOUSE NO. 1111 VPOJSKNSK DISTT.  GFDGERE G.R  PIN CODE- 129493 INDIA  NEW DELHI</div>
                         <div><span className="font-semibold text-xl">Reviews -</span>VERY GOOD APP</div>
                         <div><span className="font-semibold text-xl">Years of Experience -</span> 5 YEARS</div>
                         <div><span className="font-semibold text-xl">Speciality -</span> ENT , CARDIOLOGY</div>
                         <div className="flex">
                             <button className="p-1 border-2 bg-white w-36 rounded-md ml-6 font-medium">Appointment</button>
-                            <div className="ml-14 w-10"> Consultation Fee-$299</div>
+                            <div className="ml-14 w-10"> <span className="font-semibold text-lg">Consultation Fee-</span>$299</div>
                         </div>
                     </div>
                 </div>
                 <div className="w-auto p-6 rounded-lg flex shadow-2xl shadow-sky-200 mt-9">
                     <div className="w-40 h-40 bg-slate-300 rounded-full mt-6">
-                        <p className="text-7xl flex items-center justify-center translate-y-8">R</p>
+                        <p className="text-7xl flex items-center justify-center translate-y-10">R</p>
                     </div>
-                    <div className="ml-14 w-72">
+                    <div className="ml-14 w-72 text-left">
                         <p className="text-4xl font-semibold">Dr. Raghu Datta</p>
                         <div><span className="font-semibold text-xl">Address-</span>HOUSE NO. 1111 VPOJSKNSK DISTT.  GFDGERE G.R  PIN CODE- 129493 INDIA  NEW DELHI</div>
                         <div><span className="font-semibold text-xl">Reviews -</span>VERY GOOD APP</div>
@@ -83,15 +82,15 @@ export default function Userpanel(){
                         <div><span className="font-semibold text-xl">Speciality -</span> ENT , CARDIOLOGY</div>
                         <div className="flex">
                             <button className="p-1 border-2 bg-white w-36 rounded-md ml-6 font-medium">Appointment</button>
-                            <div className="ml-14 w-10"> Consultation Fee-$299</div>
+                            <div className="ml-14 w-10"> <span className="font-semibold text-lg">Consultation Fee-</span>$299</div>
                         </div>
                     </div>
                 </div>
                 <div className="w-auto p-6 rounded-lg flex shadow-2xl shadow-sky-200 mt-9">
                     <div className="w-40 h-40 bg-slate-300 rounded-full mt-6">
-                        <p className="text-7xl flex items-center justify-center translate-y-8">R</p>
+                        <p className="text-7xl flex items-center justify-center translate-y-10">R</p>
                     </div>
-                    <div className="ml-14 w-72">
+                    <div className="ml-14 w-72 text-left">
                         <p className="text-4xl font-semibold">Dr. Raghu Datta</p>
                         <div><span className="font-semibold text-xl">Address-</span>HOUSE NO. 1111 VPOJSKNSK DISTT.  GFDGERE G.R  PIN CODE- 129493 INDIA  NEW DELHI</div>
                         <div><span className="font-semibold text-xl">Reviews -</span>VERY GOOD APP</div>
@@ -99,15 +98,15 @@ export default function Userpanel(){
                         <div><span className="font-semibold text-xl">Speciality -</span> ENT , CARDIOLOGY</div>
                         <div className="flex">
                             <button className="p-1 border-2 bg-white w-36 rounded-md ml-6 font-medium">Appointment</button>
-                            <div className="ml-14 w-10"> Consultation Fee-$299</div>
+                            <div className="ml-14 w-10"> <span className="font-semibold text-lg">Consultation Fee-</span>$299</div>
                         </div>
                     </div>
                 </div>
                 <div className="w-auto p-6 rounded-lg flex shadow-2xl shadow-sky-200 mt-9">
                     <div className="w-40 h-40 bg-slate-300 rounded-full mt-6">
-                        <p className="text-7xl flex items-center justify-center translate-y-8">R</p>
+                        <p className="text-7xl flex items-center justify-center translate-y-10">R</p>
                     </div>
-                    <div className="ml-14 w-72">
+                    <div className="ml-14 w-72 text-left">
                         <p className="text-4xl font-semibold">Dr. Raghu Datta</p>
                         <div><span className="font-semibold text-xl">Address-</span>HOUSE NO. 1111 VPOJSKNSK DISTT.  GFDGERE G.R  PIN CODE- 129493 INDIA  NEW DELHI</div>
                         <div><span className="font-semibold text-xl">Reviews -</span>VERY GOOD APP</div>
@@ -115,11 +114,11 @@ export default function Userpanel(){
                         <div><span className="font-semibold text-xl">Speciality -</span> ENT , CARDIOLOGY</div>
                         <div className="flex">
                             <button className="p-1 border-2 bg-white w-36 rounded-md ml-6 font-medium">Appointment</button>
-                            <div className="ml-14 w-10"> Consultation Fee-$299</div>
+                            <div className="ml-14 w-10"> <span className="font-semibold text-lg">Consultation Fee-</span>$299</div>
                         </div>
                     </div>
                 </div>
             </div>
         </>
-    )
+  );
 }

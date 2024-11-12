@@ -11,10 +11,12 @@ export default {
       },
       colors: {
         maingreen: '#C2F2F2'
-
       },
-    },
+      fontSize: {
+        base: '16px', // Set base font size if it was increased
+      },
   },
   plugins: [],
 }
+};
 
