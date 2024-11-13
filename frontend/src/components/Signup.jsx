@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router-dom'
 
 export default function Signup() {
+    const navigation = useNavigate();
     return (
       <div className="flex justify-center ">
         <div className="w-6/12 rounded-md bg-slate-100 text-center flex font-Poppins">
@@ -28,7 +30,7 @@ export default function Signup() {
                     <div>
                         Already have an account? 
                     </div> 
-                    <div className="underline decoration-solid pl-3 cursor-pointer" onClick={()=>{navigate("/signin")}}>
+                    <div className="underline decoration-solid pl-3 cursor-pointer" onClick={()=>{navigation("/signin")}}>
                         Signin
                     </div>
                 </div>

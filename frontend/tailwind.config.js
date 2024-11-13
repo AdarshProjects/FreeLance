@@ -10,11 +10,12 @@ export default {
         'Poppins': ['Poppins','sans-serif'],
       },
       colors: {
-        maingreen: '#C2F2F2'
+        'maingreen': '#C2F2F2', // Add a custom color
       },
-      fontSize: {
-        base: '16px', // Set base font size if it was increased
-      },
+
+      boxShadow: {
+        '3xl': ' 0 3px 25px 10px rgb(0 0 0 0.2);',
+      }
   },
   plugins: [],
 }

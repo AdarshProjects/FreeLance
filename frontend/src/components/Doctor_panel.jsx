@@ -1,7 +1,7 @@
 export default function Doctor_panel() {
   return (
     <div>
-      <header className="bg-maingreen text-black shadow-md p-4">
+      <div className="bg-maingreen text-black shadow-md p-4">
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo Section */}
           <div className="text-2xl font-extrabold">
@@ -29,7 +29,7 @@ export default function Doctor_panel() {
             </a>
           </nav>
         </div>
-      </header>
+      </div>
 
       <div>
         <div

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-function Patient_panel() {
+function Patient_info() {
   
   const [isEditing, setIsEditing] = useState(false); 
   const [patient, setPatient] = useState({
-    name: "John Doe",
+    name: "Joh Doe",
     id: "123456789",
     height: "6 ft",
     weight: "75 kg",
@@ -26,7 +26,8 @@ function Patient_panel() {
 
  
   const handleChange = (field, value) => {
-    setPatient({ ...patient, [field]: value });
+    setPatient({ ...patient, 
+      [field]: value });
   };
 
   return ( 
@@ -152,4 +153,4 @@ function Patient_panel() {
   );
 }
 
-export default Patient_panel;
+export default Patient_info;
