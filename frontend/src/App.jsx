@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Doctor_info from './components/Doctor_info';
 import StateProvider from './components/StateProvider';
 import Doctor_intro from './components/Doctor_intro';
+import AppointmentPanel from './components/AppointPanel';
 function App() {
 
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="Doctorinfo" element={<Doctor_info/>}></Route>
           <Route path="Doctorintro" element={<Doctor_intro/>}></Route>
           <Route path="/" element={<Home/>}/>
+          <Route path="Appointmentpanel" element={<AppointmentPanel/>}/>
         </Routes>
         </StateProvider>
       </Router>
