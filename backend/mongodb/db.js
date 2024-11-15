@@ -9,14 +9,21 @@ const UserSignupSchema = new Schema({
     password: String
 })
 
-const UserSigninSchema = new Schema({
-    email: String,
-    paassword: String
+const DoctorintroSchema = new Schema({
+    Name: String,
+    Appointment_fee: String,
+    Experience: String,
+    Detail: String,
+    Address: String,
+    Age: String,
+    Education: String,
+    About: String
 })
 
 const UserSignup = mongoose.model('UserSignup', UserSignupSchema);
-const UserSignin = mongoose.model('UserSignin', UserSigninSchema);
+const Doctorintro = mongoose.model('Doctorintro', DoctorintroSchema);
 
 module.exports = {
     UserSignup,
+    Doctorintro
 }

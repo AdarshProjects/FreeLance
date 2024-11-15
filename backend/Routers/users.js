@@ -53,7 +53,7 @@ router.post("/signup",async (req,res)=>{
     
     return res.json({
         message: "User has been created successfully",
-        UserId : user._id,
+        UserId : UserId,
         token : token
     })
 })

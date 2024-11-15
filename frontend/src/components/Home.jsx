@@ -4,7 +4,7 @@ import { Statecontext } from './StateContext';
 
 export default function Home(){
     const Navigate = useNavigate();
-    const { state, setState, district, setDistrict, specialist, setSpecialist } = useContext(Statecontext);
+    const { state, setState, district, setDistrict, specialist, setSpecialist, token, settoken } = useContext(Statecontext);
     return (
         <>
             <div className="flex justify-between p-4">
@@ -12,22 +12,11 @@ export default function Home(){
                     <p className="item-center ">LOGO</p>
                 </div>
                 <div className="flex w-1/2 justify-evenly mt-2 font-semibold cursor-pointer">                                   
-                    <div className="text-center">
-                        Home
-                    </div>
-                    <div className="text-center">
-                        Appointment
-                    </div>
-                    <div className="text-c
-                    enter">
-                        Features
-                    </div>
-                    <div className="text-center">
-                        Listings
-                    </div>
-                    <div className="text-center">
-                        Login/Signup
-                    </div>
+                <a href="/" className="hover:decoration-white">Home</a>
+                    <a href="/appointments" className="hover:decoration-white">Appointments</a>
+                    <a href="/features" className="hover:decoration-white">Features</a>
+                    <a href="/listings" className="hover:decoration-white">Listings</a>
+                    {token == "" ?<a href="/Signup" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6'/>}
                 </div>
             </div>
             <div className="bg-[#C3EAEA] p-4">
@@ -114,7 +103,7 @@ export default function Home(){
                 </div>
                 <div className="h-80 w-3/12 border-black rounded-2xl shadow-[#C3EAEA] shadow-3xl">
                     <img src="/know.PNG" className="h-2/5 w-3/6 ml-16"></img>
-                    <div className="text-green-500 text-xl">know your Doctor</div>
+                    <div className="text-green-500 text-xl">Know your Doctor</div>
                     <div className="text-slate-500 text-lg">Empower yourself with knowledge. Learn about your doctor's qualifications, experience, and approach to care. Make informed decisions about your health with confidence.</div>
                 </div>
                 <div className="h-80 w-3/12 border-black rounded-2xl shadow-[#C3EAEA] shadow-3xl">

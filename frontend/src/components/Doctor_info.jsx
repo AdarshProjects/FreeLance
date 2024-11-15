@@ -104,6 +104,6 @@ export default function Dcotor_info() {
                     </div>
                 </div>
             </div>
-        </>
+        </> 
   );
 }
