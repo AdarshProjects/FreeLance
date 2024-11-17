@@ -66,7 +66,7 @@ export default function AppointmentPanel() {
         ) : (
           <div className="space-y-4">
             {appointments.map((appointment) => (
-              <div key={appointment.id} className="bg-white rounded-lg shadow p-6">
+              <div key={appointment.id} className="bg-white rounded-lg shadow-2xl p-6">
                 <h2 className="text-xl font-semibold mb-2 text-left">Name: {appointment.patientName}</h2>
                 <p className="text-left"><span className="font-medium">Age:</span> {appointment.age}</p>
                 <p className="text-left"><span className="font-medium">Date:</span> {appointment.date}</p>

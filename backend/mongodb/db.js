@@ -10,14 +10,16 @@ const UserSignupSchema = new Schema({
 })
 
 const DoctorintroSchema = new Schema({
-    Name: String,
-    Appointment_fee: String,
-    Experience: String,
-    Detail: String,
-    Address: String,
-    Age: String,
-    Education: String,
-    About: String
+    name: String,
+    fee: String,
+    experience: String,
+    speciality: String,
+    address: String,
+    State: String,
+    district: String,
+    age: String,
+    education: String,
+    about: String
 })
 
 const UserSignup = mongoose.model('UserSignup', UserSignupSchema);

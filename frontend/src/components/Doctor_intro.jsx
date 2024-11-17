@@ -1,41 +1,40 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from 'axios';
+import { Statecontext } from "./StateContext";
 
-function Doctor_intro() {
+export default function Doctor_intro() {
   const [isEditing, setIsEditing] = useState(false);
-  const [doctor, setDoctor] = useState({
-    name: "Dr. Jane Doe",
-    experience: "10 years",
-    details: "Specialist in Internal Medicine",
-    address: "675 School Lane London EC21 4MB",
-    age: "45",
-    education: "All India Institute of Medical Sciences Raipur",
-    fee: "$200",
-    about: "Dr. Jordan Blake is a compassionate and skilled physician with over a decade of experience in family medicine. Known for her patient-centered approach, Dr. Blake combines clinical expertise with a deep commitment to each patient's overall well-being. She graduated with honors from Johns Hopkins University School of Medicine and completed her residency at Massachusetts General Hospital."
-  });
+  const [experience, setexpreience] = useState("");
+  const [State, setState] = useState("");
+  const [district, setdistrict] = useState("");
+  const [education, seteducation] = useState("");
+
+  const {name, setname, address, setaddress, speciality, setspeciality, age, setage, fee, setfee, about, setabout} = useContext(Statecontext);
 
   const toggleEdit = () => setIsEditing(!isEditing);
 
-  const handleChange = (field, value) => {
-    setDoctor({ ...doctor, [field]: value });
-  };
+  useEffect(()=>{
+    axios.get("http://localhost:3000/api/v1/doctorpanel/description")
+      .then(response => {
+        console.log(response.data.doctor)
+      })
+  },[])
 
   const handleSave = () => {
-    setIsEditing(false);
-  };
-
+    setIsEditing(false)
+  }
   return (
+    
     <>
-      {/* Header Component at the very top */}
+
       <div className="bg-maingreen text-black shadow-md p-4">
         <div className="container mx-auto flex justify-between items-center">
-          {/* Logo Section */}
           <div className="text-2xl font-extrabold">
             <a href="/" className="decoration-white">
               MyLogo
             </a>
           </div>
 
-          {/* Navigation Links */}
           <nav className="space-x-6 text-lg">
             <a href="/" className="hover:decoration-white">
               Home
@@ -61,78 +60,96 @@ function Doctor_intro() {
         <h1 className="text-2xl font-semibold mb-4 text-center">Doctor Dashboard</h1>
 
         {isEditing ? (
-          <div>
+          <div className="text-left">
             <div className="mb-4 ">
               <label className="block font-medium">Name:</label>
-              <input
-                type="text"
-                value={doctor.name}
-                onChange={(e) => handleChange("name", e.target.value)}
-                className="w-full border rounded px-3 py-2 mt-1"
-              />
+              <input type="text" value={name} className="w-full border rounded px-3 py-2 mt-1" onChange={(e) => setname(e.target.value)}/>
             </div>
 
             <div className="mb-4">
-              <label className="block font-medium">Experience:</label>
-              <input
-                type="text"
-                value={doctor.experience}
-                onChange={(e) => handleChange("experience", e.target.value)}
-                className="w-full border rounded px-3 py-2 mt-1"
-              />
+                <label className="block font-medium">Experience:</label>
+                <input type="text" value={experience} onChange={(e) => setexpreience(e.target.value)} className="w-full border rounded px-3 py-2 mt-1" />
             </div>
-
-            <div className="mb-4">
-              <label className="block font-medium">Details:</label>
-              <textarea
-                value={doctor.details}
-                onChange={(e) => handleChange("details", e.target.value)}
-                className="w-full border rounded px-3 py-2 mt-1"
-                rows="3"
-              ></textarea>
+                    
+            <div className="mb-4">                 
+                <label className="block font-medium">Speciality:</label>
+                <textarea value={speciality} onChange={(e) => setspeciality(e.target.value)} className="w-full border rounded px-3 py-2 mt-1" />
             </div>
-
+                    
             <div className="mb-4">
               <label className="block font-medium">Address:</label>
-              <textarea
-                value={doctor.address}
-                onChange={(e) => handleChange("address", e.target.value)}
-                className="w-full border rounded px-3 py-2 mt-1"
-                rows="3"
-              ></textarea>
+              <textarea value={address} onChange={(e) => setaddress(e.target.value)} className="w-full border rounded px-3 py-2 mt-1" rows="3" />
             </div>
 
             <div className="mb-4">
-              <label className="block font-medium">Age:</label>
-              <input
-                type="text"
-                value={doctor.age}
-                onChange={(e) => handleChange("age", e.target.value)}
-                className="w-full border rounded px-3 py-2 mt-1"
-              />
+              <label className="block font-medium">State:</label>
+              <input value={State} onChange={(e) => setState(e.target.value)} className="w-full border rounded px-3 py-2 mt-1" />
             </div>
 
+            <div className="mb-4">
+              <label className="block font-medium">District:</label>
+              <input value={district} onChange={(e) => setdistrict(e.target.value)} className="w-full border rounded px-3 py-2 mt-1"  />
+            </div>
+                    
+            <div className="mb-4">
+              <label className="block font-medium">Age:</label>
+             <input type="text" value={age} onChange={(e) => setage(e.target.value)} className="w-full border rounded px-3 py-2 mt-1" />
+            </div>
+
+            <div className="mb-4">
+              <label className="block font-medium">Appointment Fee:</label>
+              <input type="text" value={fee} onChange={(e) => setfee(e.target.value)} className="w-full border rounded px-3 py-2 mt-1" />
+            </div>
+
+            <div className="mb-4">
+              <label className="block font-medium">Education:</label>
+              <input type="text" value={education} onChange={(e) => seteducation(e.target.value)} className="w-full border rounded px-3 py-2 mt-1" />
+            </div>
+
+            <div className="mb-4">
+              <label className="block font-medium">About:</label>
+              <textarea type="text" value={about} onChange={(e) => setabout(e.target.value)} className="w-full border rounded px-3 py-2 mt-1" />
+            </div>
+
+
             <button
-              onClick={handleSave}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              onClick={async()=>{
+                handleSave(); 
+                const response = await axios.post("http://localhost:3000/api/v1/doctorpanel/description",{
+                  name,
+                  experience,
+                  fee,
+                  speciality,
+                  address,
+                  State,
+                  district,
+                  age,
+                  education,
+                  about
+                })
+                }
+              }
+              
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 items-center"
             >
               Save
             </button>
           </div>
         ) : (
           <div>
-            <p className="mb-2 grid justify-items-start "><span className="font-medium">Name:</span> {doctor.name}</p>
-            <p className="mb-2 grid justify-items-start "><span className="font-medium">Appointment Fee:</span> {doctor.fee}</p>
-            <p className="mb-2 grid justify-items-start"><span className="font-medium">Experience:</span> {doctor.experience}</p>
-            <p className="mb-4 grid justify-items-start"><span className="font-medium">Details:</span> {doctor.details}</p>
-            <p className="mb-4 grid justify-items-start"><span className="font-medium">Address:</span> {doctor.address}</p>
-            <p className="mb-4 grid justify-items-start"><span className="font-medium">Age:</span> {doctor.age}</p>
-            <p className="mb-4 grid justify-items-start"><span className="font-medium">Education:</span> {doctor.education}</p>
-            <p className="mb-4 grid justify-items-start"><span className="font-medium">About:</span> {doctor.about}</p>
+            <p className="mt-4 mb-4 grid justify-items-start"><span className="font-medium">Name:</span> {name}</p>
+            <p className="mt-4 mb-4 grid justify-items-start"><span className="font-medium">Appointment Fee:</span> {fee}</p>
+            <p className="mt-4 mb-4 grid justify-items-start"><span className="font-medium">Experience:</span> {experience}</p>
+            <p className="mt-4 mb-4 grid justify-items-start"><span className="font-medium">Speciality:</span> {speciality}</p>
+            <p className="mt-4 mb-4 grid justify-items-start"><span className="font-medium">Address:</span> {address}</p>
+            <p className="mt-4 mb-4 grid justify-items-start"><span className="font-medium">State:</span> {State}</p>
+            <p className="mt-4 mb-4 grid justify-items-start"><span className="font-medium">District:</span> {district}</p>
+            <p className="mt-4 mb-4 grid justify-items-start"><span className="font-medium">Age:</span> {age}</p>
+            <p className="mt-4 mb-4 grid justify-items-start"><span className="font-medium">Education:</span> {education}</p>
+            <p className="mt-4 mb-4 grid justify-items-start"><span className="font-medium">About:</span> {about}</p>
             <button
               onClick={toggleEdit}
-              className="px-4 py-2 bg-maingreen text-black rounded hover:bg-blue-300 hover:text-white"
-            >
+              className="px-4 py-2 bg-maingreen text-black rounded hover:bg-blue-300 hover:text-white">
               Edit
             </button>
           </div>
@@ -141,5 +158,3 @@ function Doctor_intro() {
     </>
   );
 }
-
-export default Doctor_intro;

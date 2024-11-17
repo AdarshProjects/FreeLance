@@ -5,19 +5,18 @@ const { Doctorintro } = require("../mongodb/db");
 console.log("reaches in the doctor panel");
 
 const descriptionSchema = zod.object({
-    Name: zod.string(),
-    Appointment_fee: zod.string(),
-    Experience: zod.string(),
-    Detail: zod.string(),
-    Address: zod.string(),                            
-    Age: zod.string(),
-    Education: zod.string(),
-    About: zod.string()
+    name: zod.string(),
+    fee: zod.string(),
+    experience: zod.string(),
+    speciality: zod.string(),
+    address: zod.string(),   
+    State: zod.string(),
+    district: zod.string(),      
+    age: zod.string(),
+    education: zod.string(),
+    about: zod.string()
 })
 
-router.get("/hello", (req,res)=>{
-    res.send("hi from the doctorpanel")
-})
 router.post("/description", async(req,res)=>{
     const payload = descriptionSchema.safeParse(req.body);
     if(!payload){
@@ -26,19 +25,36 @@ router.post("/description", async(req,res)=>{
         })
     }
     const Doctor = await Doctorintro.create({
-        Name: req.body.Name,
-        Appointment_fee: req.body.Appointment_fee,
-        Experience: req.body.Experience,
-        Detail: req.body.Detail,
-        Address: req.body.Address,
-        Age: req.body.Age,
-        Education: req.body.Education,
-        About: req.body.About
+        name: req.body.name,
+        fee: req.body.fee,
+        experience: req.body.experience,
+        speciality: req.body.speciality,
+        address: req.body.address,
+        State: req.body.State,
+        district: req.body.district,
+        age: req.body.age,
+        education: req.body.education,
+        about: req.body.about
     })
     const Doctorid = Doctor._id;
     return res.json({
         Message: "Doctor details has succesfully feeded",
         Doctorid: Doctorid
+    })
+})
+
+router.get("/bulk", async(req,res)=>{
+    const doctors = await Doctorintro.find();
+
+    if(doctors.length==0){
+        return res.status(404).json({
+            message: "no doctor is found on the database"
+        })
+    }
+    
+    return res.json({
+        message: "doctor has been found succesfully",
+        doctors
     })
 })
 
