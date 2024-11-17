@@ -4,6 +4,7 @@ const zod = require("zod");
 const { Doctorintro } = require("../mongodb/db");
 console.log("reaches in the doctor panel");
 
+
 const descriptionSchema = zod.object({
     name: zod.string(),
     fee: zod.string(),
@@ -43,7 +44,7 @@ router.post("/description", async(req,res)=>{
     })
 })
 
-router.get("/bulk", async(req,res)=>{
+router.get("/doctorsdetail", async(req,res)=>{
     const doctors = await Doctorintro.find();
 
     if(doctors.length==0){
@@ -58,4 +59,25 @@ router.get("/bulk", async(req,res)=>{
     })
 })
 
+router.get("/particulardetail", async(req,res)=>{
+    const {id} = req.query;
+    console.log(req.query);
+    console.log(id);
+    const doctors = await Doctorintro.findOne({_id : id});
+    if(!id){
+        return res.json({
+            message:"id is not found in this "
+        })
+    }
+    if(doctors){
+        return res.json({
+            message: "particular doctor has been found",
+            doctors
+        })
+    }else{
+        return res.status(404).json({
+            message: "error in finding the doctor"
+        })
+    }
+})
 module.exports = router;

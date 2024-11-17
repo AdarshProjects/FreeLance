@@ -11,7 +11,7 @@ export default function Doctor_info() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/v1/doctorpanel/bulk");
+                const response = await axios.get("http://localhost:3000/api/v1/doctorpanel/doctorsdetail");
                 console.log("state before", doctorname)
                 setdoctorname(response.data.doctors);
                 console.log("state after update", doctorname);
@@ -57,10 +57,10 @@ export default function Doctor_info() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3 p-4">
   { doctorname.map((doctors, index) => {
     return (
-      <div key={index} className="w-full p-6 rounded-lg flex shadow-3xl shadow-cyan-100 mt-9">
+      <div key={index} className="w-full p-6 rounded-lg flex shadow-3xl shadow-cyan-200 mt-9">
         <div className="w-40 h-40 bg-slate-300 rounded-full mt-6">
           <p className="text-7xl flex items-center justify-center translate-y-10">{doctors.name[0]}</p>
         </div>
@@ -71,7 +71,7 @@ export default function Doctor_info() {
           <div><span className="font-semibold text-xl">Years of Experience -</span>{doctors.experience}</div>
           <div><span className="font-semibold text-xl">Speciality -</span>{doctors.speciality}</div>
           <div className="flex">
-            <button className="p-1 border-2 bg-white w-36 rounded-md ml-6 font-medium" onClick={() => navigate("/doctorpanel")}>Appointment</button>
+            <button className="p-1 border-2 bg-white w-36 rounded-md ml-6 font-medium" onClick={() => navigate('/doctorpanel?id='+doctors._id)}>Appointment</button>
             <div className="ml-14 w-10"> <span className="font-semibold text-lg">Consultation Fee-</span>${doctors.fee}</div>
           </div>
         </div>

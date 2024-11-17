@@ -1,8 +1,26 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export default function Doctor_panel() {
+  const [doctordetails, setdoctordetails] = useState([]);
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
+  const [params] = useSearchParams();
+  const id = params.get('id');
+  
+  useEffect(()=>{
+
+    const fetchdoctordetails = async()=>{
+      const response = await axios.get(`http://localhost:3000/api/v1/doctorpanel/particulardetail?id=${id}`)
+      setdoctordetails(response.data.doctors);
+    }
+    fetchdoctordetails();
+  },[id])
+
+  useEffect(()=>{
+
+  }),[doctordetails]
 
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   const timeSlots = ["9:00 AM", "11:00 AM", "1:00 PM", "3:00 PM", "5:00 PM"];
@@ -34,7 +52,8 @@ export default function Doctor_panel() {
         </div>
       </header>
 
-      <div className="mt-8">
+        
+          <div className="mt-8">
         <div className="max-w-3xl w-full mx-auto bg-white rounded-lg shadow-lg overflow-hidden flex flex-col space-y-4">
           {/* Doctor's Information */}
           <div className="flex flex-col md:flex-row h-full">
@@ -47,18 +66,14 @@ export default function Doctor_panel() {
             </div>
             <div className="w-full md:w-2/3 p-6 flex flex-col justify-between">
               <div>
-                <h2 className="text-3xl font-semibold text-gray-800">Dr. Jordan Blake</h2>
+                <h2 className="text-3xl font-semibold text-gray-800">{doctordetails.name}</h2>
                 <p className="mt-4 text-gray-600 text-justify">
-                  Dr. Jordan Blake is a compassionate and skilled physician with over a decade of
-                  experience in family medicine. Known for her patient-centered approach, Dr. Blake
-                  combines clinical expertise with a deep commitment to each patient's well-being.
-                  She graduated with honors from Johns Hopkins University School of Medicine and
-                  completed her residency at Massachusetts General Hospital.
+                  {doctordetails.about}
                 </p>
               </div>
               <div className="mt-4">
                 <span className="font-semibold text-gray-700">Appointment Fee:</span>
-                <span className="ml-2 text-green-600">$50</span>
+                <span className="ml-2 text-green-600">${doctordetails.fee}</span>
               </div>
             </div>
           </div>
@@ -107,6 +122,7 @@ export default function Doctor_panel() {
           </div>
         </div>
       </div>
+        )
     </div>
   );
 }
