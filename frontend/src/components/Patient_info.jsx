@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 function Patient_info() {
-  
-  const [isEditing, setIsEditing] = useState(false); 
-  const [patient, setPatient] = useState({
-    name: "Joh Doe",
-    id: "123456789",
-    height: "6 ft",
-    weight: "75 kg",
-    age: "34 years",
-    bloodType: "O+",
-    medicalHistory: ["Diabetes Type II", "Allergy to penicillin", "High blood pressure"],
-    upcomingAppointments: [
-      { title: "Check-up with Dr. Smith", date: "Nov 14, 2024" },
-      { title: "Blood Test", date: "Dec 01, 2024" }
-    ],
-    prescriptions: [
-      "Metformin - 500mg twice a day",
-      "Lisinopril - 10mg once a day"
-    ]
-  });
+  const navigate = useNavigate();
+  const [isEditing, setIsEditing] = useState(false);
+  const [name, setname]  = useState("");
+  const [height, setheight] = useState("");
+  const [age, setage] = useState("");
+  const [weight, setweight] = useState("");
+  const [gender, setgender] = useState("");
+  const [healthconcern, sethealthconcern] = useState("");
+  const [bloodtype, setbloodtype] = useState("");
+  const [patient, setPatient] = useState([]);
 
+  const fetchinfo = async () => {
+    try {
+      const response = await axios.post("http://localhost:3000/api/v1/patientpanel/patientinfo", {
+        name,
+        height,
+        weight,
+        age,
+        bloodtype,
+        healthconcern,
+        gender
+      });
+      console.log("Response:", response.data);
+      localStorage.setItem("PatientId", response.data.patient._id);
+
+    } catch (error) {
+      console.error("Error sending request:", error);
+    }
+  };
+  
 
   const toggleEdit = () => setIsEditing(!isEditing);
 
@@ -59,15 +72,21 @@ function Patient_info() {
       
         <div className="border-b border-gray-300 pb-6 mb-6">
           <h2 className="text-2xl font-semibold text-gray-800">Patient Information</h2>
-          <p className="text-gray-500">Patient ID: {patient.id}</p>
+          <p className="text-gray-500">Fill your details</p>
           <div className="flex items-center justify-between">
             {isEditing ? (
-              <input
+                <input
                 type="text"
-                value={patient.name}
-                onChange={(e) => handleChange("name", e.target.value)}
-                className="text-2xl font-semibold text-gray-800 border-b-2 border-gray-300 outline-none"
-              />
+                placeholder="Name"
+                value={name}
+                onChange={(e) => {handleChange("name", e.target.value);
+                  setname(e.target.value)
+                }
+                }
+                className="text-2xl font-semibold text-slate-900 border-b-2 border-gray-300 outline-none"
+                />
+              
+              
             ) : (
               <h2 className="text-2xl font-semibold text-gray-800">{patient.name}</h2>
             )}
@@ -83,71 +102,133 @@ function Patient_info() {
         </div>
 
         
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          {["height", "weight", "age", "bloodType"].map((field) => (
-            <div key={field} className="bg-gray-50 p-4 rounded-lg shadow-sm">
-              <h3 className="text-lg font-medium text-gray-700 capitalize">{field}</h3>
+        <div className="gap-4 mb-6">
+            <div className="bg-gray-50 p-4 rounded-lg shadow-sm  w-full  grid grid-cols-2 gap-4">
               {isEditing ? (
-                <input
-                  type="text"
-                  value={patient[field]}
-                  onChange={(e) => handleChange(field, e.target.value)}
-                  className="w-full text-2xl font-bold text-gray-900 border-b-2 border-gray-300 outline-none"
-                />
+                <>
+                <label className="text-2xl font-medium text-gray-700 capitalize ">Height
+                  <input
+                    type="text"
+                    value={height}
+                    placeholder="Height"
+                    onChange={(e) => {handleChange(e.target.value),
+                      setheight(e.target.value);
+                    }}
+                    className="w-full text-lg font-semibold text-slate-700 border-b-2 border-gray-300 outline-none p-1"
+                  />
+                </label>
+                
+                <label className="text-2xl font-medium text-gray-700 capitalize">Weight
+                  <input
+                    type="text"
+                    value={weight}
+                    placeholder='weight'
+                    onChange={(e) => {handleChange(e.target.value),
+                      setweight(e.target.value);
+                    }}
+                    className="w-full text-lg font-semibold text-slate-700 border-b-2 border-gray-300 outline-none p-1 "
+                  />
+                </label>
+                <label className="text-2xl font-medium text-gray-700 capitalize">Age
+                  <input
+                    type="text"
+                    value={age}
+                    placeholder='Age'
+                    onChange={(e) => {handleChange(e.target.value),
+                      setage(e.target.value);
+                    }}
+                    className="w-full text-lg font-semibold text-slate-700 border-b-2 border-gray-300 outline-none p-1"
+                    />
+                </label>
+                <label className="text-2xl font-medium text-gray-700 capitalize">Blood group
+                  <input
+                    type="text"
+                    value={bloodtype}
+                    placeholder='Blood group'
+                    onChange={(e) => {handleChange(e.target.value),
+                      setbloodtype(e.target.value);
+                    }}
+                    className="w-full text-lg font-semibold text-slate-700 border-b-2 border-gray-300 outline-none p-1"
+                    />
+                </label>
+                <label className="text-2xl font-medium text-gray-700 capitalize">Gender
+                  <input
+                    type="text"
+                    value={gender}
+                    placeholder='Gender'
+                    onChange={(e) => {handleChange(e.target.value),
+                      setgender(e.target.value);
+                    }}
+                    className="w-full text-lg font-semibold text-slate-700 border-b-2 border-gray-300 outline-none p-1"
+                    />
+                </label>
+                </>
               ) : (
-                <p className="text-2xl font-bold text-gray-900">{patient[field]}</p>
+                <>
+                <label className="text-2xl font-semibold text-gray-900">Height
+                    <p className='w-full text-lg font-semibold text-gray-700 border-b-2 border-gray-300 outline-none p-1'>{height}</p>
+                </label>
+                <label className="text-2xl font-semibold text-gray-900">Weight
+                    <p className='w-full text-lg font-semibold text-gray-700 border-b-2 border-gray-300 outline-none p-1'>{weight}</p>
+                </label>
+                <label className="text-2xl font-semibold text-gray-900">Age
+                    <p className='w-full text-lg font-semibold text-gray-700 border-b-2 border-gray-300 outline-none p-1'>{age}</p>
+                </label>
+                <label className="text-2xl font-semibold text-gray-900">Blood group
+                    <p className='w-full text-lg font-semibold text-gray-700 border-b-2 border-gray-300 outline-none p-1'>{bloodtype}</p>
+                </label>  
+                <label className="text-2xl font-semibold text-gray-900">Gender
+                    <p className='w-full text-lg font-semibold text-gray-700 border-b-2 border-gray-300 outline-none p-1'>{gender}</p>
+                </label> 
+                
+                </>
               )}
             </div>
-          ))}
+          
         </div>
 
         
         <div className="bg-gray-50 p-6 rounded-lg shadow-md mb-6">
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">Medical History</h3>
           {isEditing ? (
+            <>
+            <label className="text-2xl font-semibold text-gray-700 capitalize">Health Concern</label>
             <textarea
-              value={patient.medicalHistory.join("\n")}
-              onChange={(e) =>
-                handleChange("medicalHistory", e.target.value.split("\n"))
-              }
-              className="w-full p-2 border border-gray-300 rounded-md outline-none text-gray-700"
+            className="w-full p-2 border border-gray-300 rounded-md outline-none text-gray-700"
+            onChange={(e)=>{
+              sethealthconcern(e.target.value);
+            }}
             />
+            </>
           ) : (
-            <ul className="list-disc list-inside space-y-2 text-gray-700">
-              {patient.medicalHistory.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
+            <>
+
+            <div className="text-2xl font-semibold text-gray-900 -mt-3">HealthConcern
+              <div className="space-y-3 text-gray-700 font-normal text-lg">
+                <div>{healthconcern}</div>
+              </div>
+            </div>
+            
+            </>
+            
           )}
         </div>
-
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          
-          <div className="bg-gray-50 p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">Upcoming Appointments</h3>
-            <ul className="space-y-3">
-              {patient.upcomingAppointments.map((appointment, index) => (
-                <li key={index} className="flex justify-between text-gray-700">
-                  <span>{appointment.title}</span>
-                  <span>{appointment.date}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          
-          <div className="bg-gray-50 p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">Recent Prescriptions</h3>
-            <ul className="space-y-3">
-              {patient.prescriptions.map((prescription, index) => (
-                <li key={index} className="text-gray-700">
-                  {prescription}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <button
+              onClick={()=>{
+                if(isEditing==true){
+                  alert("Please save your details")
+                }else if(name=="" || height=="" || weight=="" || age=="" || bloodtype=="" || healthconcern==""){
+                  alert("Plese fill the details")
+                }else{
+                fetchinfo();
+                navigate("/doctorinfo")
+                }
+              }}
+              className="px-4 py-2 bg-maingreen text-black font-semibold rounded-lg 
+              hover:bg-maingreen-600 focus:outline-none focus:ring focus:ring-blue-300 
+              focus:outline-none"
+            >
+              Next
+            </button>
       </div>
     </div>
   );

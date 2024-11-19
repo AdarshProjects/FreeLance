@@ -4,6 +4,10 @@ import { Statecontext } from './StateContext';
 
 export default function Home(){
     const Navigate = useNavigate();
+    const handleproceeding = ()=>{
+        alert("Please fill some details brfore proceeding"); 
+        Navigate("/patientinfo")
+    }
     const { state, setState, district, setDistrict, specialist, setSpecialist, token, settoken } = useContext(Statecontext);
     return (
         <>
@@ -92,7 +96,9 @@ export default function Home(){
                         <option>GYNOLOGY</option>
                         <option>AYURVEDIC</option>
                     </select>
-                    <button className="p-3 w-24 bg-[#6888E7] rounded-full" onClick={()=> Navigate("/Doctorinfo")}>Search</button>
+                    <button className="p-3 w-24 bg-[#6888E7] rounded-full" onClick={()=>
+                        handleproceeding()
+                        }>Search</button>;
                 </div>
             </div>
             <div className="flex justify-around  mt-12 md-12">

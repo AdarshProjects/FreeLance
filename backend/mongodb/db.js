@@ -9,6 +9,16 @@ const UserSignupSchema = new Schema({
     password: String
 })
 
+const patientSchema = new Schema({
+    name: String,
+    hieght: String,
+    weight: String,
+    age: String,
+    bloodtype: String,
+    gender: String,
+    healthconcern: String,
+})
+
 const DoctorintroSchema = new Schema({
     name: String,
     fee: String,
@@ -22,10 +32,22 @@ const DoctorintroSchema = new Schema({
     about: String
 })
 
+const patientappointmentSchema = new Schema ({
+    patientname: String,           
+    doctorname: String,
+    speciality: String,
+    date: String,
+    time : String
+})
+
 const UserSignup = mongoose.model('UserSignup', UserSignupSchema);
 const Doctorintro = mongoose.model('Doctorintro', DoctorintroSchema);
+const PatientINFO = mongoose.model('patientINFO', patientSchema);
+const AppointmentINFO = mongoose.model('AppointmentINFO', patientappointmentSchema)
 
 module.exports = {
     UserSignup,
-    Doctorintro
+    Doctorintro,
+    PatientINFO,
+    AppointmentINFO
 }

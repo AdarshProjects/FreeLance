@@ -1,13 +1,32 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function Doctor_panel() {
   const [doctordetails, setdoctordetails] = useState([]);
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
+  const [patientdetail, setpatientdetail] = useState("");
   const [params] = useSearchParams();
   const id = params.get('id');
+  const patientid = localStorage.getItem("PatientId");
+  const Navigate = useNavigate();
+
+
+  //fetching the patient details to show in the appointment panel 
+  useEffect(()=>{
+
+    const fetchpatientdetail = async()=>{
+      const response = await axios.get(`http://localhost:3000/api/v1/patientpanel/particularpatient?patientid=${patientid}`)
+      console.log(response.data);
+      setpatientdetail(response.data);
+    } 
+    fetchpatientdetail();
+  },[patientid])
+
+  useEffect(()=>{
+
+  },[patientdetail]);
   
   useEffect(()=>{
 
@@ -28,13 +47,29 @@ export default function Doctor_panel() {
   const handleBooking = () => {
     if (selectedDay && selectedTime) {
       alert(`Appointment booked on ${selectedDay} at ${selectedTime}`);
+      Navigate('/appointmentpanel')
     } else {
       alert("Please select a day and time slot");
     }
   };
 
+  const sendinglist = ()=>{
+    useEffect(()=>{
+      async()=>{
+        const response = await axios.post("http://localhost:3000/api/v1/appointmentpanel/appointmentlist",{
+          patientname: patientdetail.patient.name,
+          doctorname: doctordetails.name,
+          speciality: doctordetails.speciality,
+          date: selectedDay,
+          time: selectedTime
+        })
+      }
+    },[patientid])
+  }
+
   return (
     <div>
+      <div>{patientid}</div>
       <header className="bg-maingreen text-black shadow-md p-4">
         <div className="container mx-auto flex justify-between items-center">
           <div className="text-2xl font-extrabold">
@@ -73,7 +108,7 @@ export default function Doctor_panel() {
               </div>
               <div className="mt-4">
                 <span className="font-semibold text-gray-700">Appointment Fee:</span>
-                <span className="ml-2 text-green-600">${doctordetails.fee}</span>
+                <span className="ml-2 text-green-600">{doctordetails.fee}</span>
               </div>
             </div>
           </div>
@@ -114,7 +149,10 @@ export default function Doctor_panel() {
 
             {/* Book Appointment Button */}
             <button
-              onClick={handleBooking}
+              onClick={()=>{
+                handleBooking();
+                sendinglist()
+              }}
               className="px-6 py-2 bg-maingreen text-black rounded hover:bg-white hover:border-dotted border-2 border-sky-500"
             >
               Book Appointment
@@ -122,7 +160,6 @@ export default function Doctor_panel() {
           </div>
         </div>
       </div>
-        )
     </div>
   );
 }

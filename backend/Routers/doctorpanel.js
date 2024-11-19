@@ -61,8 +61,6 @@ router.get("/doctorsdetail", async(req,res)=>{
 
 router.get("/particulardetail", async(req,res)=>{
     const {id} = req.query;
-    console.log(req.query);
-    console.log(id);
     const doctors = await Doctorintro.findOne({_id : id});
     if(!id){
         return res.json({
