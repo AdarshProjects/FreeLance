@@ -19,7 +19,7 @@ export default function Doctor_panel() {
     const fetchpatientdetail = async()=>{
       const response = await axios.get(`http://localhost:3000/api/v1/patientpanel/particularpatient?patientid=${patientid}`)
       console.log(response.data);
-      setpatientdetail(response.data);
+      setpatientdetail(response.data.patient);
     } 
     fetchpatientdetail();
   },[patientid])
@@ -53,19 +53,18 @@ export default function Doctor_panel() {
     }
   };
 
-  const sendinglist = ()=>{
-    useEffect(()=>{
-      async()=>{
+
+      const sendinglist = async()=>{
         const response = await axios.post("http://localhost:3000/api/v1/appointmentpanel/appointmentlist",{
-          patientname: patientdetail.patient.name,
+          patientname: patientdetail.name,
+          healthconcern: patientdetail.healthconcern,
           doctorname: doctordetails.name,
           speciality: doctordetails.speciality,
           date: selectedDay,
-          time: selectedTime
+          time: selectedTime  
         })
       }
-    },[patientid])
-  }
+
 
   return (
     <div>
@@ -151,7 +150,7 @@ export default function Doctor_panel() {
             <button
               onClick={()=>{
                 handleBooking();
-                sendinglist()
+                sendinglist();
               }}
               className="px-6 py-2 bg-maingreen text-black rounded hover:bg-white hover:border-dotted border-2 border-sky-500"
             >

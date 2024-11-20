@@ -16,7 +16,7 @@ export default function Doctor_info() {
             try {
                 const response = await axios.get("http://localhost:3000/api/v1/doctorpanel/doctorsdetail");
                 setdoctorname(response.data.doctors);
-                console.log(response.data.doctors)
+                console.log(response.data.doctors);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -31,17 +31,12 @@ export default function Doctor_info() {
     useEffect(() => {
         const filteredDoctors = doctorname.filter(
           (doctor) =>
-            state.toLowerCase() === doctor.State.toLowerCase() &&
-            specialist.toLowerCase() === doctor.speciality.toLowerCase() 
+            state.toLowerCase() === doctor.State?.toLowerCase() &&
+            specialist.toLowerCase() === doctor.speciality?.toLowerCase() 
         );
         setfiltering(filteredDoctors);
         console.log(filteredDoctors);
-        
       }, [doctorname, state, specialist]); // Add dependencies to ensure this runs when inputs change
-    
-      useEffect(() => {
-        
-      }, [filtering]);
     return (
         <>
             <div>
@@ -90,7 +85,7 @@ export default function Doctor_info() {
           <div><span className="font-semibold text-xl">Years of Experience -</span>{doctors.experience}</div>
           <div><span className="font-semibold text-xl">Speciality -</span>{doctors.speciality}</div>
           <div className="flex">
-            <button className="p-1 border-2 bg-white w-36 rounded-md ml-6 font-medium" onClick={() =>
+            <button className="border-2 bg-white w-36 rounded-md ml-6 font-medium" onClick={() =>
                 navigate('/doctorpanel?id='+doctors._id)
                 }>Appointment</button>
             <div className="ml-14 w-10"> <span className="font-semibold text-lg">Consultation Fee-</span>${doctors.fee}</div>

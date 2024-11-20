@@ -10,6 +10,8 @@ import StateProvider from './components/StateProvider';
 import Doctor_intro from './components/Doctor_intro';
 import AcceptingAppointment from './components/AcceptingAppointment';
 import AppointmentPanel from './components/AppointmentPanel';
+import { ToastContainer, toast } from 'react-custom-alert';
+import 'react-custom-alert/dist/index.css';
 function App() {
 
   return (
@@ -29,6 +31,7 @@ function App() {
         </Routes>
         </StateProvider>
       </Router>
+      <ToastContainer floatingTime={5000} />
     </>
   )
 }

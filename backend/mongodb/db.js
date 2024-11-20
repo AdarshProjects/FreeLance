@@ -33,10 +33,11 @@ const DoctorintroSchema = new Schema({
 })
 
 const patientappointmentSchema = new Schema ({
-    patientname: String,           
+    patientname: String,  
+    healthconcern: String,         
     doctorname: String,
     speciality: String,
-    date: String,
+    day: String,
     time : String
 })
 

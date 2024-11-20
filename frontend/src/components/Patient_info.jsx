@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-custom-alert';
 
 
 function Patient_info() {
@@ -215,9 +216,9 @@ function Patient_info() {
         <button
               onClick={()=>{
                 if(isEditing==true){
-                  alert("Please save your details")
+                  toast.warning("Please save your details")
                 }else if(name=="" || height=="" || weight=="" || age=="" || bloodtype=="" || healthconcern==""){
-                  alert("Plese fill the details")
+                  toast.warning("Plese fill the details")
                 }else{
                 fetchinfo();
                 navigate("/doctorinfo")

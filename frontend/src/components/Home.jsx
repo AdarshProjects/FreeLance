@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Statecontext } from './StateContext';
+import { ToastContainer, toast } from 'react-custom-alert';
 
 export default function Home(){
     const Navigate = useNavigate();
     const handleproceeding = ()=>{
-        alert("Please fill some details brfore proceeding"); 
+        toast.info("Please fill some details before proceeding"); 
         Navigate("/patientinfo")
     }
     const { state, setState, district, setDistrict, specialist, setSpecialist, token, settoken } = useContext(Statecontext);

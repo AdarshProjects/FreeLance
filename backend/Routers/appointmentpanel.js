@@ -5,9 +5,10 @@ const router = express.Router();
 
 const patientappointmentschema = zod.object({
     patientname: zod.string(),
+    healthconcern: zod.string(),
     doctorname: zod.string(),
     speciality: zod.string(),
-    date: zod.string(),
+    day: zod.string(),
     time: zod.string()
 })
 
@@ -24,14 +25,23 @@ router.post("/appointmentlist", async(req,res)=>{
     }
     const appointments = await AppointmentINFO.create({
         patientname: req.body.patientname,
+        healthconcern: req.body.healthconcern,
         doctorname: req.body.doctorname,
         speciality: req.body.speciality,
-        date: req.body.date,
+        day: req.body.date,
         time: req.body.time
     })
     res.json({
         message: "appointment is succesfully stored",
         appointments
+    })
+})
+
+router.get("/appointments", async(req,res)=>{
+    const list = await AppointmentINFO.find({});
+    res.json({
+        message: "appointments list has been found succesfully",
+        list
     })
 })
 
