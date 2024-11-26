@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mainrouter = require("./Routers/index");
-const port = process.env.PORT || 3000;
+const port =  3000;
 
 //Some middlware type setup
 app.use(cors());
