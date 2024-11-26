@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const zod = require("zod");
 const { Doctorintro } = require("../mongodb/db");
-console.log("reaches in the doctor panel");
 
 
 const descriptionSchema = zod.object({

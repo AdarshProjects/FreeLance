@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Statecontext } from "./patientpov/StateContext";
 
 export default function StateProvider({children}){
@@ -13,6 +13,13 @@ export default function StateProvider({children}){
     const [age, setage] = useState("");
     const [fee, setfee] = useState("");
     const [about, setabout] = useState("");
+    useEffect(() => {
+        const storedToken = localStorage.getItem("token");
+        if (storedToken) {
+            settoken(storedToken);
+        }
+    }, []);
+    
 
     return (
         <>

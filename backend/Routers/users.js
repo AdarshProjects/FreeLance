@@ -26,8 +26,6 @@ router.post("/signup",async (req,res)=>{
         return res.status(404).json({
             message: "Body is not recieved and it is not able to fetch it "
         })
-    }else{
-        console.log("going good nice");
     }
     const ExistingUser = await UserSignup.findOne({
         email: req.body.email

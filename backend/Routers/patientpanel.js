@@ -2,7 +2,6 @@ const express = require("express");
 const zod = require("zod");
 const { PatientINFO } = require("../mongodb/db");
 const router = express.Router();
-console.log("reached in the patientpa")
 
 const patientinfo = zod.object({
     name: zod.string(),

@@ -72,7 +72,7 @@ export default function Signin() {
                         <div>Don't have an account?</div>
                         <div
                             className="underline decoration-solid pl-3 cursor-pointer"
-                            onClick={() => navigate("/signup")}
+                            onClick={() => navigate("/")}
                         >
                             Sign Up
                         </div>
