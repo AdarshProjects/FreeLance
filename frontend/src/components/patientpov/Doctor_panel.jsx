@@ -9,8 +9,11 @@ export default function Doctor_panel() {
   const [patientdetail, setpatientdetail] = useState("");
   const [params] = useSearchParams();
   const id = params.get('id');
+  const [appointmentobject_id, setappointmentobject_id] = useState("");
   const patientid = localStorage.getItem("PatientId");
   const Navigate = useNavigate();
+  const [status, setstatus] = useState("Pending");
+  let object_id;
 
 
   //fetching the patient details to show in the appointment panel 
@@ -47,7 +50,7 @@ export default function Doctor_panel() {
   const handleBooking = () => {
     if (selectedDay && selectedTime) {
       alert(`Appointment booked on ${selectedDay} at ${selectedTime}`);
-      Navigate('/appointmentpanel')
+      window.location.href=`/appointmentpanel?id=${appointmentobject_id}`;
     } else {
       alert("Please select a day and time slot");
     }
@@ -55,36 +58,49 @@ export default function Doctor_panel() {
 
 
       const sendinglist = async()=>{
+        try{
         const response = await axios.post("http://localhost:3000/api/v1/appointmentpanel/appointmentlist",{
           patientname: patientdetail.name,
           healthconcern: patientdetail.healthconcern,
           doctorname: doctordetails.name,
           speciality: doctordetails.speciality,
           date: selectedDay,
-          time: selectedTime  
+          time: selectedTime,
+          status: status
         })
+        console.log("console",response.data.appointments._id)
+        object_id = response.data.appointments._id;
+      }catch(e){
+        console.log("error",e);
+      }
       }
 
 
   return (
     <div>
-      <div>{patientid}</div>
-      <header className="bg-maingreen text-black shadow-md p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="text-2xl font-extrabold">
-            <a href="/" className="decoration-white">
-              MyLogo
-            </a>
-          </div>
-          <nav className="space-x-6 text-lg">
-            <a href="/" className="hover:decoration-white">Home</a>
-            <a href="/appointments" className="hover:decoration-white">Appointments</a>
-            <a href="/features" className="hover:decoration-white">Features</a>
-            <a href="/listings" className="hover:decoration-white">Listings</a>
-            <a href="/login" className="hover:decoration-white">Login/Signup</a>
-          </nav>
-        </div>
-      </header>
+      <div className="flex justify-between p-2 bg-maingreen">
+                <div className="min-w-32 h-10 bg-maingreen grid place-items-center rounded  ">
+                    <p className="item-center font-bold text-black-400 hover:text-sky-400 cursor-pointer ">DOCBRIDGE</p>
+                </div>
+                <div className="flex w-1/2 justify-evenly mt-2 font-semibold cursor-pointer">
+                    <div className="text-center">
+                        Home
+                    </div>
+                    <div className="text-center">
+                        Appointment
+                    </div>
+                    <div className="text-c
+                    enter">
+                        Features
+                    </div>
+                    <div className="text-center">
+                        Listings
+                    </div>
+                    <div className="text-center">
+                        Login/Signup
+                    </div>
+                </div>
+            </div> 
 
         
           <div className="mt-8">
@@ -148,10 +164,16 @@ export default function Doctor_panel() {
 
             {/* Book Appointment Button */}
             <button
-              onClick={()=>{
-                handleBooking();
-                sendinglist();
+              onClick={async() => {
+                await sendinglist(); // Call the function after checking conditions
+                if (selectedDay && selectedTime) {
+                  alert(`Appointment booked on ${selectedDay} at ${selectedTime}`);
+                  Navigate( `/appointmentpanel`); 
+                } else {
+                  alert("Please select a day and time slot");
+                }
               }}
+              
               className="px-6 py-2 bg-maingreen text-black rounded hover:bg-white hover:border-dotted border-2 border-sky-500"
             >
               Book Appointment

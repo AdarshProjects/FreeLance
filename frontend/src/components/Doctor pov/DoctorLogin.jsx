@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Statecontext } from "./StateContext";
 import axios from "axios";
+import { toast } from "react-custom-alert";
 
-export default function Signin() {
-    const { token, settoken } = useContext(Statecontext);
+export default function DoctorLogin() {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const navigate = useNavigate();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -22,7 +22,7 @@ export default function Signin() {
                 <div className="m-7 ml-12 text-left font-Poppins">
                     <p className="font-Poppins text-slate-500">Welcome Back👋</p>
                     <h2 className="text-xl font-semibold font-Poppins mb-5">
-                        Login to your Account
+                        Signin in to your Doctor Account
                     </h2>
                     <label className="block mb-2 mt-12 text-slate-600">
                         Email
@@ -49,22 +49,17 @@ export default function Signin() {
                     <button
                         className="w-full rounded-md border p-1 bg-[#91CDCB]"
                         onClick={async () => {
-                            try {
-                                const response = await axios.post(
-                                    "http://localhost:3000/api/v1/user/signin",
-                                    {
-                                        email,
-                                        password,
-                                    }
-                                );
-                                settoken(response.data.token);
-                                localStorage.setItem("token", response.data.token);
-                                navigate("/Home");
-                            } catch (e) {
-                                console.log("error details", e);
-                                alert("Enter valid email or password");
+                            if (email === "" || password === "") {
+                                toast.warning("Fill in the details");
+                            } else if (!emailRegex.test(email)) {
+                                toast.warning("Please enter a valid email (e.g., user@email.com)");
+                            } else if (password.length < 8) {
+                                toast.warning("Password should be at least 8 characters");
+                            } else {
+                                window.location.href="/Doctorintro";
                             }
                         }}
+                        
                     >
                         <p className="text-white">Sign in</p>
                     </button>
@@ -72,7 +67,7 @@ export default function Signin() {
                         <div>Don't have an account?</div>
                         <div
                             className="underline decoration-solid pl-3 cursor-pointer"
-                            onClick={() => navigate("/signup")}
+                            onClick={() =>window.location.href("/Doctorintro")}
                         >
                             Sign Up
                         </div>

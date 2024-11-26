@@ -49,24 +49,29 @@ function Patient_info() {
 
 
     <div className="min-h-screen bg-gray-100 p-6">
-           <header className="bg-maingreen text-black shadow-md p-4">
-                     <div className="container mx-auto flex justify-between items-center">
-                    
-                    
-                    <div className="text-2xl font-extrabold">
-                    <a href="/" className="decoration-white">MyLogo</a>
-                    </div>
-                    
-                   
-                    <nav className="space-x-6 text-lg">
-                    <a href="/" className="hover:decoration-white">Home</a>
-                    <a href="/appointments" className="hover:decoration-white">Appointments</a>
-                    <a href="/features" className="hover:decoration-white">Features</a>
-                    <a href="/listings" className="hover:decoration-white">Listings</a>
-                    <a href="/login" className="hover:decoration-white">Login/Signup</a>
-                    </nav>
+           <div className="flex justify-between p-2 bg-maingreen">
+                <div className="min-w-32 h-10 bg-maingreen grid place-items-center rounded  ">
+                    <p className="item-center font-bold text-black-400 hover:text-sky-400 cursor-pointer ">DOCBRIDGE</p>
                 </div>
-                </header>
+                <div className="flex w-1/2 justify-evenly mt-2 font-semibold cursor-pointer">
+                    <div className="text-center">
+                        Home
+                    </div>
+                    <div className="text-center">
+                        Appointment
+                    </div>
+                    <div className="text-c
+                    enter">
+                        Features
+                    </div>
+                    <div className="text-center">
+                        Listings
+                    </div>
+                    <div className="text-center">
+                        Login/Signup
+                    </div>
+                </div>
+            </div> 
 
 
       <div className="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">

@@ -40,16 +40,12 @@ export default function Doctor_info() {
     return (
         <>
             <div>
-            <h1>Another Page</h1>
-            <p>State: {state}</p>
-            <p>District: {district}</p>
-            <p>Specialist: {specialist}</p>
         </div>        
-            <div className="flex justify-between p-2 bg-maingreen">
-                <div className="min-w-32 h-10 bg-slate-300 grid place-items-center rounded">
-                    <p className="item-center ">LOGO</p>
+        <div className="flex justify-between p-2 bg-maingreen">
+                <div className="min-w-32 h-10 bg-maingreen grid place-items-center rounded  ">
+                    <p className="item-center font-bold text-black-400 hover:text-sky-400 cursor-pointer ">DOCBRIDGE</p>
                 </div>
-                <div className="flex w-1/2 justify-evenly mt-2 font-semibold cursor-pointer">                                   
+                <div className="flex w-1/2 justify-evenly mt-2 font-semibold cursor-pointer">
                     <div className="text-center">
                         Home
                     </div>
@@ -67,8 +63,7 @@ export default function Doctor_info() {
                         Login/Signup
                     </div>
                 </div>
-            </div>
-
+            </div> 
             <div className="grid grid-cols-2 gap-3 p-4">
 
   {filtering.map((doctors) => {

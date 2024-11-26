@@ -38,17 +38,27 @@ const patientappointmentSchema = new Schema ({
     doctorname: String,
     speciality: String,
     day: String,
-    time : String
+    time : String,
+    status: String,
+})
+
+const docsignupSchema = new Schema({
+    firstname: String,
+    lastname: String,
+    email: String,
+    password: String
 })
 
 const UserSignup = mongoose.model('UserSignup', UserSignupSchema);
 const Doctorintro = mongoose.model('Doctorintro', DoctorintroSchema);
 const PatientINFO = mongoose.model('patientINFO', patientSchema);
 const AppointmentINFO = mongoose.model('AppointmentINFO', patientappointmentSchema)
+const Docsignup = mongoose.model('docsignup', docsignupSchema);
 
 module.exports = {
     UserSignup,
     Doctorintro,
     PatientINFO,
-    AppointmentINFO
+    AppointmentINFO,
+    Docsignup
 }

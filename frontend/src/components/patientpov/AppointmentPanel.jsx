@@ -22,17 +22,28 @@ export default function AppointmentPanel() {
   return (
     <>
       <div className="flex justify-between p-2 bg-maingreen">
-        <div className="min-w-32 h-10 bg-slate-300 grid place-items-center rounded">
-          <p className="item-center ">LOGO</p>
-        </div>
-        <div className="flex w-1/2 justify-evenly mt-2 font-semibold cursor-pointer">
-          <div className="text-center">Home</div>
-          <div className="text-center">Appointment</div>
-          <div className="text-center">Features</div>
-          <div className="text-center">Listings</div>
-          <div className="text-center">Login/Signup</div>
-        </div>
-      </div>
+                <div className="min-w-32 h-10 bg-maingreen grid place-items-center rounded  ">
+                    <p className="item-center font-bold text-black-400 hover:text-sky-400 cursor-pointer ">DOCBRIDGE</p>
+                </div>
+                <div className="flex w-1/2 justify-evenly mt-2 font-semibold cursor-pointer">
+                    <div className="text-center">
+                        Home
+                    </div>
+                    <div className="text-center">
+                        Appointment
+                    </div>
+                    <div className="text-c
+                    enter">
+                        Features
+                    </div>
+                    <div className="text-center">
+                        Listings
+                    </div>
+                    <div className="text-center">
+                        Login/Signup
+                    </div>
+                </div>
+            </div> 
 
       {appointments.map((appointment) => {
         return (
@@ -44,10 +55,11 @@ export default function AppointmentPanel() {
               <p><span className="font-semibold text-xl">Healthconcern: </span><span className="text-lg">{appointment.healthconcern}</span></p>
               <p><span className="font-semibold text-xl">Specialist: </span><span className="text-lg">{appointment.speciality}</span></p>
               <p><span className="font-semibold text-xl">Day and Time: </span><span>{appointment.day} || {appointment.time}</span></p>
+              <p><span className="font-semibold text-xl">Status: </span><span className="text-lg">{appointment.status}</span></p>
             </div>
             <div className="mr-12">
               <button className="bg-cyan-100 p-1 text-lg rounded mt-9 text-red-600">
-                Pending....
+                {appointment.status}
               </button>
             </div>
           </div>

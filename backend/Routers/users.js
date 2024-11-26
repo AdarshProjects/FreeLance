@@ -32,8 +32,6 @@ router.post("/signup",async (req,res)=>{
     const ExistingUser = await UserSignup.findOne({
         email: req.body.email
     });
-    const email = req.body.email;
-    console.log(email);
     if(ExistingUser){
         return res.status(404).json({
             message: "Username or emailname is present already"

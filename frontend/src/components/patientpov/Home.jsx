@@ -13,9 +13,12 @@ export default function Home(){
     return (
         <>
             <div className="flex justify-between p-4">
-                <div className="min-w-32 h-10 bg-slate-300 grid place-items-center rounded">
-                    <p className="item-center ">LOGO</p>
+            <div className="min-w-32 h-10 bg-maingreen grid place-items-center rounded  ">
+                    <p className="item-center font-bold text-black-400 hover:text-sky-400 cursor-pointer ">DOCBRIDGE</p>
                 </div>
+                <button onClick={()=>{
+                    window.location.href="doctorlogin"
+                }}className='-ml-80 border-2 rounded font-bold border-teal-100'>Doctor Panel</button>
                 <div className="flex w-1/2 justify-evenly mt-2 font-semibold cursor-pointer">                                   
                 <a href="/" className="hover:decoration-white">Home</a>
                     <a href="/appointments" className="hover:decoration-white">Appointments</a>

@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { Statecontext } from "./StateContext";
+import { toast } from "react-custom-alert";
+import { useNavigate } from "react-router-dom";
 
 export default function Doctor_intro() {
   const [isEditing, setIsEditing] = useState(false);
@@ -8,6 +10,7 @@ export default function Doctor_intro() {
   const [State, setState] = useState("");
   const [district, setdistrict] = useState("");
   const [education, seteducation] = useState("");
+  const Navigate = useNavigate();
 
   const {name, setname, address, setaddress, speciality, setspeciality, age, setage, fee, setfee, about, setabout} = useContext(Statecontext);
 
@@ -27,33 +30,29 @@ export default function Doctor_intro() {
     
     <>
 
-      <div className="bg-maingreen text-black shadow-md p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="text-2xl font-extrabold">
-            <a href="/" className="decoration-white">
-              MyLogo
-            </a>
-          </div>
-
-          <nav className="space-x-6 text-lg">
-            <a href="/" className="hover:decoration-white">
-              Home
-            </a>
-            <a href="/appointments" className="hover:decoration-white">
-              Appointments
-            </a>
-            <a href="/features" className="hover:decoration-white">
-              Features
-            </a>
-            <a href="/listings" className="hover:decoration-white">
-              Listings
-            </a>
-            <a href="/login" className="hover:decoration-white">
-              Login/Signup
-            </a>
-          </nav>
-        </div>
-      </div>
+<div className="flex justify-between p-2 bg-maingreen">
+                <div className="min-w-32 h-10 bg-maingreen grid place-items-center rounded  ">
+                    <p className="item-center font-bold text-black-400 hover:text-sky-400 cursor-pointer ">DOCBRIDGE</p>
+                </div>
+                <div className="flex w-1/2 justify-evenly mt-2 font-semibold cursor-pointer">
+                    <div className="text-center">
+                        Home
+                    </div>
+                    <div className="text-center">
+                        Appointment
+                    </div>
+                    <div className="text-c
+                    enter">
+                        Features
+                    </div>
+                    <div className="text-center">
+                        Listings
+                    </div>
+                    <div className="text-center">
+                        Login/Signup
+                    </div>
+                </div>
+            </div> 
 
       {/* Doctor Dashboard */}
       <div className="max-w-lg mx-auto mt-1 p-6 bg-white rounded-lg shadow-lg">
@@ -115,18 +114,6 @@ export default function Doctor_intro() {
             <button
               onClick={async()=>{
                 handleSave(); 
-                const response = await axios.post("http://localhost:3000/api/v1/doctorpanel/description",{
-                  name,
-                  experience,
-                  fee,
-                  speciality,
-                  address,
-                  State,
-                  district,
-                  age,
-                  education,
-                  about
-                })
                 }
               }
               
@@ -154,6 +141,33 @@ export default function Doctor_intro() {
             </button>
           </div>
         )}
+          <button
+              onClick={async()=>{
+                if(name==""&&fee==""&&experience==""&&speciality==""&&address==""&&State==""&&district==""&&age==""&&education==""&&about==""){
+                  toast.warning("fill the details porperly")
+                }
+                else{
+                const response = await axios.post("http://localhost:3000/api/v1/doctorpanel/description",{
+                  name,
+                  experience,
+                  fee,
+                  speciality,
+                  address,
+                  State,
+                  district,
+                  age,
+                  education,
+                  about
+                })
+                window.location.href="appointmentlist";
+              }
+                }
+              }
+              
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 items-center"
+            >
+              Next
+            </button>
       </div>
     </>
   );
