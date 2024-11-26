@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mainrouter = require("./Routers/index");
+const port = process.env.PORT || 3000;
 
 //Some middlware type setup
 app.use(cors());
@@ -11,6 +12,6 @@ app.use(express.json());
 app.use('/api/v1', mainrouter);
 
 
-app.listen(3000,()=>{
+app.listen(port,()=>{
     console.log("succesfully launched in the localhost 3000")
 })
