@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Statecontext } from "./StateContext";
 import axios from "axios";
+import { toast } from "react-custom-alert";
 
 export default function Signin() {
     const { token, settoken } = useContext(Statecontext);
@@ -49,6 +50,9 @@ export default function Signin() {
                     <button
                         className="w-full rounded-md border p-1 bg-[#91CDCB]"
                         onClick={async () => {
+                            if(email == "" && password == ""){
+                                toast.warning("Please fill the details")
+                            }else{
                             try {
                                 const response = await axios.post(
                                     "http://localhost:3000/api/v1/user/signin",
@@ -57,13 +61,18 @@ export default function Signin() {
                                         password,
                                     }
                                 );
+                                if (response.data.message === "enter an valid username or password") {
+                                    toast.warning(response.data.message); // Show the message from the response
+                                }else{
                                 settoken(response.data.token);
                                 localStorage.setItem("token", response.data.token);
-                                navigate("/Home");
+                                navigate("/home")
+                                }
                             } catch (e) {
                                 console.log("error details", e);
                                 alert("Enter valid email or password");
                             }
+                        }
                         }}
                     >
                         <p className="text-white">Sign in</p>

@@ -4,10 +4,16 @@ import { Statecontext } from './StateContext';
 import { ToastContainer, toast } from 'react-custom-alert';
 
 export default function Home(){
+    const [open, setopen] = useState(true);
+    const patientnumber = localStorage.getItem("PatientId");
     const Navigate = useNavigate();
     const handleproceeding = ()=>{
-        toast.info("Please fill some details before proceeding"); 
-        Navigate("/patientinfo")
+        if(patientnumber){
+        Navigate("/doctorinfo");
+        }else{
+            toast.info("Please fill some details before proceeding"); 
+            Navigate("/patientinfo")
+        }
     }
     const { state, setState, district, setDistrict, specialist, setSpecialist, token, settoken } = useContext(Statecontext);
     return (
@@ -24,7 +30,13 @@ export default function Home(){
                     <a href="/appointments" className="hover:decoration-white">Appointments</a>
                     <a href="/features" className="hover:decoration-white">Features</a>
                     <a href="/listings" className="hover:decoration-white">Listings</a>
-                    {token == "" ?<a href="/Signup" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6'/>}
+                    {token == "" ?<a href="/Signup" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
+                        if(patientnumber){
+                            Navigate("/patientinfo2")
+                        }else{
+                            toast.warning("Please fill your details first (name and other details)")
+                        }
+                    }}/>}
                 </div>
             </div>
             <div className="bg-[#C3EAEA] p-4">
@@ -79,7 +91,7 @@ export default function Home(){
                             <option value="bilaspur">Bilaspur</option>
                             <option value="durg">Durg</option>
                             <option value="korba">Korba</option>
-                            <option value="bastar">Bastar</option>\
+                            <option value="bastar">Bastar</option>
                         </>
                     : state == "Madhya Pradesh" ? 
                         <>
@@ -87,7 +99,7 @@ export default function Home(){
                             <option value="bhopal">Bhopal</option>
                             <option value="gwalior">Gwalior</option>
                             <option value="jabalpur">Jabalpur</option>
-                            <option value="uj   jain">Ujjain</option>
+                            <option value="ujjain">Ujjain</option>
                         </>
                     :<option>District</option>}
                     </select>
@@ -100,46 +112,67 @@ export default function Home(){
                         <option>GYNOLOGY</option>
                         <option>AYURVEDIC</option>
                     </select>
-                    <button className="p-3 w-24 bg-[#6888E7] rounded-full" onClick={()=>
+                    <button className="p-3 w-24 bg-white rounded-full hover:bg-cyan-100" onClick={()=>
                         handleproceeding()
-                        }>Search</button>;
+                        }>Search</button>
                 </div>
             </div>
-            <div className="flex justify-around  mt-12 md-12">
-                <div className="h-80 w-3/12 border-black rounded-2xl shadow-[#C3EAEA] shadow-3xl">
-                    <img src="/easy.PNG" className="h-2/5 w-3/6 ml-16"></img>
-                    <div className="text-green-500 text-xl">Easy Appointments, Expert Care</div>
-                    <div className="text-slate-500 text-lg">Simplify your healthcare journey. Book appointments  with  top   doctors effortlessly, from the comfort of your home. Access quality medical advice and services at your fingertips.</div>
+
+
+         
+            <div className="flex flex-wrap justify-center gap-8 mt-12 mb-20">
+                <div className="flex flex-col items-center h-auto w-80 border border-gray-300 rounded-2xl shadow-lg p-6">
+                    <img src="/easy.PNG" className="h-32 w-32 object-contain mb-6" alt="Easy Appointments" />
+                    <div className="text-green-500 text-xl text-center mb-4">Easy Appointments, Expert Care</div>
+                    <p className="text-slate-500 text-center text-lg leading-relaxed">
+                        Simplify your healthcare journey. Book appointments with top doctors effortlessly, from the comfort of your home.
+                    </p>
                 </div>
-                <div className="h-80 w-3/12 border-black rounded-2xl shadow-[#C3EAEA] shadow-3xl">
-                    <img src="/know.PNG" className="h-2/5 w-3/6 ml-16"></img>
-                    <div className="text-green-500 text-xl">Know your Doctor</div>
-                    <div className="text-slate-500 text-lg">Empower yourself with knowledge. Learn about your doctor's qualifications, experience, and approach to care. Make informed decisions about your health with confidence.</div>
+                <div className="flex flex-col items-center h-auto w-80 border border-gray-300 rounded-2xl shadow-lg p-6">
+                    <img src="/know.PNG" className="h-32 w-32 object-contain mb-6" alt="Know Your Doctor" />
+                    <div className="text-green-500 text-xl text-center mb-4">Know your Doctor</div>
+                    <p className="text-slate-500 text-center text-lg leading-relaxed">
+                        Empower yourself with knowledge. Learn about your doctor's qualifications, experience, and approach to care. 
+                    </p>
                 </div>
-                <div className="h-80 w-3/12 border-black rounded-2xl shadow-[#C3EAEA] shadow-3xl">
-                    <img src="/book consult.PNG" className="h-2/5 w-3/6 ml-16"></img>
-                    <div className="text-green-500 text-xl">Book, Consult, Recover.</div>
-                    <div className="text-slate-500 text-lg ">Simplify your healthcare journey. Book appointments, consult with experts, and recover faster.</div>
+                <div className="flex flex-col items-center h-auto w-80 border border-gray-300 rounded-2xl shadow-lg p-6">
+                    <img src="/book consult.PNG" className="h-32 w-32 object-contain mb-6" alt="Book Consult Recover" />
+                    <div className="text-green-500 text-xl text-center mb-4">Book, Consult, Recover.</div>
+                    <p className="text-slate-500 text-center text-lg leading-relaxed">
+                        Simplify your healthcare journey. Book appointments, consult with experts, and recover faster.
+                    </p>
                 </div>
             </div>
-            <div className="mt-12 flex justify-around">
-                <div>
-                    <div className="text-3xl text-cyan-500 font-semibold text-left">DOCBRIDGE</div>
-                    <div className="w-72 text-lg text-slate-500 text-left mt-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+
+            <div className="w-full h-auto bg-teal-100 py-10 flex justify-around items-start">
+                <div className="max-w-sm">
+                    <div className="text-3xl text-cyan-500 font-semibold">DOCBRIDGE</div>
+                    <div className="text-lg text-slate-500 mt-4">
+                    DocBridge is your trusted partner in bridging the gap between patients and healthcare professionals. 
+                    Our mission is to make healthcare accessible, efficient, and stress-free for everyone.
+                    </div>
                 </div>
-                <div>
+
+
+                <div className="max-w-sm">
                     <div className="text-xl font-semibold">COMPANY</div>
-                    <div className="text-lg text-slate-500 text-left mt-4">Home</div>
-                    <div className="text-lg text-slate-500 text-left">About</div>
-                    <div className="text-lg text-slate-500 text-left">Contact</div>
-                    <div className="text-lg text-slate-500 text-left">Help</div>
+                    <ul className="text-lg text-slate-500 mt-4 space-y-2">
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                    <li>Help</li>
+                    </ul>
                 </div>
-                <div>
+
+
+                <div className="max-w-sm">
                     <div className="text-xl font-semibold">GET IN TOUCH</div>
-                    <div className="text-lg text-slate-500 text-left mt-4">+0-000-000-000</div>
-                    <div className="text-lg text-slate-500 text-left">abvcdcsd@gmail.com</div>
+                    <div className="text-lg text-slate-500 mt-4 space-y-2">
+                    <p>+0-000-000-000</p>
+                    <p>DocBridge@gmail.com</p>
+                    </div>
                 </div>
-            </div>
+                </div>           
         </>
     )
 }

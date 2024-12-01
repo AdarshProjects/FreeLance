@@ -1,8 +1,10 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Statecontext } from './StateContext';
 
 export default function AppointmentPanel() {
   const [appointments, setappointments] = useState([]);
+  const { token, settoken } = useContext(Statecontext);
 
   useEffect(() => {
     const fetchinglist = async () => {
@@ -40,7 +42,13 @@ export default function AppointmentPanel() {
                         Listings
                     </div>
                     <div className="text-center">
-                        Login/Signup
+                    {token == "" ?<a href="/Signup" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
+                        if(patientnumber){
+                            Navigate("/patientinfo2")
+                        }else{
+                            toast.warning("Please fill your details first (name and other details)")
+                        }
+                    }}/>}
                     </div>
                 </div>
             </div> 

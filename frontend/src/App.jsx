@@ -13,6 +13,7 @@ import { ToastContainer, toast } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css';
 import AppointmentList from './components/Doctor pov/AppointmentList';
 import DoctorLogin from './components/Doctor pov/DoctorLogin';
+import Patientinfo2 from './components/patientpov/patientinfo2';
 function App() {
 
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="appointmentpanel" element={<AppointmentPanel/>}/>
           <Route path="appointmentlist" element={<AppointmentList/>}/>
           <Route path="doctorlogin" element={<DoctorLogin/>}/>
+          <Route path="patientinfo2" element={<Patientinfo2/>}/>
         </Routes>
         </StateProvider>
       </Router>

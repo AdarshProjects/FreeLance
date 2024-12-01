@@ -2,6 +2,7 @@ const express = require("express");
 const zod = require("zod");
 const { PatientINFO } = require("../mongodb/db");
 const router = express.Router();
+const mongoose = require("mongoose");
 
 const patientinfo = zod.object({
     name: zod.string(),
@@ -59,5 +60,54 @@ router.get("/particularpatient", async(req,res)=>{
         })
     }
 })
+
+router.get("/userpng", async(req,res)=>{
+    const ID = req.query.id;
+    const patient = await PatientINFO.findOne({_id: ID})
+    if(patient){
+        return res.json({
+            message: "patient details",
+            patient
+        })
+    }
+})
+
+
+router.put("/update", async (req, res) => {
+    try {
+        const { id } = req.query; // Extract 'id' from req.query
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: "Invalid ID" });
+        }
+
+        const { name, height, weight, age, bloodtype, gender, healthconcern } = req.body;
+
+        // Build the update object dynamically
+        const updateFields = {};
+        if (name !== undefined) updateFields.name = name;
+        if (height !== undefined) updateFields.height = height;
+        if (weight !== undefined) updateFields.weight = weight;
+        if (age !== undefined) updateFields.age = age;
+        if (bloodtype !== undefined) updateFields.bloodtype = bloodtype;
+        if (gender !== undefined) updateFields.gender = gender;
+        if (healthconcern !== undefined) updateFields.healthconcern = healthconcern;
+
+        // Perform the update
+        const update = await PatientINFO.updateOne(
+            { _id: new mongoose.Types.ObjectId(id) },
+            { $set: updateFields }
+        );
+
+        if (update.nModified > 0 || update.matchedCount > 0) {
+            return res.json({ message: "User updated successfully", update });
+        } else {
+            return res.status(404).json({ message: "User not found or no changes applied" });
+        }
+    } catch (error) {
+        return res.status(500).json({ message: "An error occurred", error: error.message });
+    }
+});
+
+
 
 module.exports = router;

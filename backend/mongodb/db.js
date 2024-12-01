@@ -11,7 +11,7 @@ const UserSignupSchema = new Schema({
 
 const patientSchema = new Schema({
     name: String,
-    hieght: String,
+    height: String,
     weight: String,
     age: String,
     bloodtype: String,

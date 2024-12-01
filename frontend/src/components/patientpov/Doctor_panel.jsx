@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { Statecontext } from './StateContext';
 
 export default function Doctor_panel() {
   const [doctordetails, setdoctordetails] = useState([]);
@@ -14,6 +15,7 @@ export default function Doctor_panel() {
   const Navigate = useNavigate();
   const [status, setstatus] = useState("Pending");
   let object_id;
+  const { token, settoken } = useContext(Statecontext);
 
 
   //fetching the patient details to show in the appointment panel 
@@ -97,7 +99,13 @@ export default function Doctor_panel() {
                         Listings
                     </div>
                     <div className="text-center">
-                        Login/Signup
+                    {token == "" ?<a href="/Signup" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
+                        if(patientnumber){
+                            Navigate("/patientinfo2")
+                        }else{
+                            toast.warning("Please fill your details first (name and other details)")
+                        }
+                    }}/>}
                     </div>
                 </div>
             </div> 

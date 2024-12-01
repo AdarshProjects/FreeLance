@@ -8,6 +8,7 @@ export default function Doctor_info() {
     const [filtering, setfiltering] = useState([]);
     const navigate = useNavigate();
     const {state, district, specialist } = useContext(Statecontext);
+    const { token, settoken } = useContext(Statecontext);
 
 
     
@@ -18,7 +19,7 @@ export default function Doctor_info() {
                 setdoctorname(response.data.doctors);
                 console.log(response.data.doctors);
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.log("Error fetching data:", error);
             }
         };
         fetchData();
@@ -60,7 +61,13 @@ export default function Doctor_info() {
                         Listings
                     </div>
                     <div className="text-center">
-                        Login/Signup
+                    {token == "" ?<a href="/Signup" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
+                        if(patientnumber){
+                            Navigate("/patientinfo2")
+                        }else{
+                            toast.warning("Please fill your details first (name and other details)")
+                        }
+                    }}/>}
                     </div>
                 </div>
             </div> 

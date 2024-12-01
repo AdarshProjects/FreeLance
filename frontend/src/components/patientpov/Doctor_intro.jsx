@@ -11,17 +11,11 @@ export default function Doctor_intro() {
   const [district, setdistrict] = useState("");
   const [education, seteducation] = useState("");
   const Navigate = useNavigate();
+  const { token, settoken } = useContext(Statecontext);
 
   const {name, setname, address, setaddress, speciality, setspeciality, age, setage, fee, setfee, about, setabout} = useContext(Statecontext);
 
   const toggleEdit = () => setIsEditing(!isEditing);
-
-  useEffect(()=>{
-    axios.get("http://localhost:3000/api/v1/doctorpanel/description")
-      .then(response => {
-        console.log(response.data.doctor)
-      })
-  },[])
 
   const handleSave = () => {
     setIsEditing(false)
@@ -49,7 +43,7 @@ export default function Doctor_intro() {
                         Listings
                     </div>
                     <div className="text-center">
-                        Login/Signup
+                    {token == "" ?<a href="/Signup" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6'/>}
                     </div>
                 </div>
             </div> 
@@ -159,7 +153,9 @@ export default function Doctor_intro() {
                   education,
                   about
                 })
-                window.location.href="appointmentlist";
+                console.log("DETAILS",response.data);
+                localStorage.setItem("Doctorid", response.data.Doctorid)
+                Navigate("/appointmentlist");
               }
                 }
               }

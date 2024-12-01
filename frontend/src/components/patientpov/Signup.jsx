@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { Statecontext } from './StateContext';
+import { toast } from 'react-custom-alert';
 
 export default function Signup() {
     const [firstname, setFirstname] = useState("");
@@ -67,6 +68,9 @@ export default function Signup() {
                     <button
                         className="w-full rounded-md border p-1 bg-[#91CDCB]"
                         onClick={async () => {
+                            if(firstname == "" && lastname == "" && email == "" && password == ""){
+                                toast.warning("Please fill the details")
+                            }else{
                             try {
                                 const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
                                     firstname,
@@ -80,6 +84,7 @@ export default function Signup() {
                             } catch (e) {
                                 alert("Account with this email or username already exists. Please try logging in instead.");
                             }
+                           }
                         }}
                     >
                         <p className="text-white">Sign up</p>

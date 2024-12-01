@@ -21,7 +21,6 @@ router.get("/testing", (req,res)=>{
 })
 
 router.post("/docsignup",async(req,res)=>{
-    console.log("reached in the doctordignup route");
     const payload = docsignupschema.safeParse(req.body);
     if(!payload){
         return res.status(404).json({
@@ -43,7 +42,6 @@ router.post("/docsignup",async(req,res)=>{
         password : req.body.password
     })
     const UserId = doctorinfo._id;
-    console.log(UserId);
     const token = jwt.sign({
         UserId
     }, JWT_SECRET)

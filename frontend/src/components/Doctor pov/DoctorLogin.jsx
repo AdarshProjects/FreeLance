@@ -6,8 +6,9 @@ import { toast } from "react-custom-alert";
 export default function DoctorLogin() {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
-    const navigate = useNavigate();
+    const Navigate = useNavigate();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const doctornumber = localStorage.getItem("Doctorid")
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -55,10 +56,13 @@ export default function DoctorLogin() {
                                 toast.warning("Please enter a valid email (e.g., user@email.com)");
                             } else if (password.length < 8) {
                                 toast.warning("Password should be at least 8 characters");
-                            } else {
-                                window.location.href="/Doctorintro";
+                            }else if(doctornumber.length > 0){
+                                    Navigate("/appointmentlist")
+                            }else{
+                                 Navigate("/Doctorintro")
                             }
-                        }}
+                            }
+                        }
                         
                     >
                         <p className="text-white">Sign in</p>
@@ -67,7 +71,6 @@ export default function DoctorLogin() {
                         <div>Don't have an account?</div>
                         <div
                             className="underline decoration-solid pl-3 cursor-pointer"
-                            onClick={() =>window.location.href("/Doctorintro")}
                         >
                             Sign Up
                         </div>
