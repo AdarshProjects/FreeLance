@@ -43,7 +43,7 @@ export default function Doctor_intro() {
                         Listings
                     </div>
                     <div className="text-center">
-                    {token == "" ?<a href="/Signup" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6'/>}
+                    {token == "" ?<a href="/" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6'/>}
                     </div>
                 </div>
             </div> 

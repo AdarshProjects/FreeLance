@@ -35,14 +35,14 @@ export default function AppointmentPanel() {
                         Appointment
                     </div>
                     <div className="text-c
-                    enter">
+                     enter">
                         Features
                     </div>
                     <div className="text-center">
                         Listings
                     </div>
                     <div className="text-center">
-                    {token == "" ?<a href="/Signup" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
+                    {token == "" ?<a href="/" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
                         if(patientnumber){
                             Navigate("/patientinfo2")
                         }else{

@@ -26,11 +26,11 @@ export default function Home(){
                     window.location.href="doctorlogin"
                 }}className='-ml-80 border-2 rounded font-bold border-teal-100'>Doctor Panel</button>
                 <div className="flex w-1/2 justify-evenly mt-2 font-semibold cursor-pointer">                                   
-                <a href="/" className="hover:decoration-white">Home</a>
-                    <a href="/appointments" className="hover:decoration-white">Appointments</a>
+                <a href="/home" className="hover:decoration-white">Home</a>
+                    <a href="/appointmentpanel" className="hover:decoration-white">Appointments</a>
                     <a href="/features" className="hover:decoration-white">Features</a>
                     <a href="/listings" className="hover:decoration-white">Listings</a>
-                    {token == "" ?<a href="/Signup" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
+                    {token == "" ?<a href="/" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
                         if(patientnumber){
                             Navigate("/patientinfo2")
                         }else{

@@ -32,8 +32,8 @@ export default function Doctor_info() {
     useEffect(() => {
         const filteredDoctors = doctorname.filter(
           (doctor) =>
-            state.toLowerCase() === doctor.State?.toLowerCase() &&
-            specialist.toLowerCase() === doctor.speciality?.toLowerCase() 
+            state.toUpperCase() === doctor.State?.toUpperCase() &&
+            specialist.toUpperCase() === doctor.speciality?.toUpperCase() 
         );
         setfiltering(filteredDoctors);
         console.log(filteredDoctors);
@@ -61,7 +61,7 @@ export default function Doctor_info() {
                         Listings
                     </div>
                     <div className="text-center">
-                    {token == "" ?<a href="/Signup" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
+                    {token == "" ?<a href="/" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
                         if(patientnumber){
                             Navigate("/patientinfo2")
                         }else{

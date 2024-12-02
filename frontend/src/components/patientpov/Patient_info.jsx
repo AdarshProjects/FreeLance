@@ -56,12 +56,12 @@ function Patient_info() {
                     <p className="item-center font-bold text-black-400 hover:text-sky-400 cursor-pointer ">DOCBRIDGE</p>
                 </div>
                 <div className="flex w-1/2 justify-evenly mt-2 font-semibold cursor-pointer">
-                    <div className="text-center">
+                    <a href="/home" className="text-center">
                         Home
-                    </div>
-                    <div className="text-center">
+                    </a>
+                    <a href="appointmentpanel" className="text-center">
                         Appointment
-                    </div>
+                    </a> 
                     <div className="text-c
                     enter">
                         Features
@@ -70,7 +70,7 @@ function Patient_info() {
                         Listings
                     </div>
                     <div className="text-center">
-                    {token == "" ?<a href="/Signup" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
+                    {token == "" ?<a href="/" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
                         if(patientnumber){
                             Navigate("/patientinfo2")
                         }else{
