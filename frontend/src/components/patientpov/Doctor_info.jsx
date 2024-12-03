@@ -63,7 +63,7 @@ export default function Doctor_info() {
                     <div className="text-center">
                     {token == "" ?<a href="/" className="hover:decoration-white">Login/Signup</a>: <img src='/user.png' className='w-6 h-6' onClick={()=>{
                         if(patientnumber){
-                            Navigate("/patientinfo2")
+                            navigate("/patientinfo2")
                         }else{
                             toast.warning("Please fill your details first (name and other details)")
                         }
@@ -90,83 +90,13 @@ export default function Doctor_info() {
             <button className="border-2 bg-white w-36 rounded-md ml-6 font-medium" onClick={() =>
                 navigate('/doctorpanel?id='+doctors._id)
                 }>Appointment</button>
-            <div className="ml-14 w-10"> <span className="font-semibold text-lg">Consultation Fee-</span>${doctors.fee}</div>
+            <div className="ml-14 w-10"> <span className="font-semibold text-lg">Consultation Fee-</span>{doctors.fee}</div>
           </div>
         </div>
       </div>
     );
   })}
 </div>
-
-            {/** 
-            <div className="p-3 grid grid-cols-2 gap-3">
-                <div className="w-auto p-6 rounded-lg flex shadow-3xl shadow-cyan-100 mt-9">
-                    <div className="w-40 h-40 bg-slate-300 rounded-full mt-6">
-                        <p className="text-7xl flex items-center justify-center translate-y-10">R</p>
-                    </div>
-                    <div className="ml-14 w-72 text-left">
-                        <p className="text-4xl font-semibold ">{name}</p>
-                        <div><span className="font-semibold text-xl">Address-</span>{address}</div>
-                        <div><span className="font-semibold text-xl">Age -</span>{age}</div>
-                        <div><span className="font-semibold text-xl">Years of Experience -</span>{experience}</div>
-                        <div><span className="font-semibold text-xl">Speciality -</span>{specialist}</div>
-                        <div className="flex">
-                            <button className="p-1 border-2 bg-white w-36 rounded-md ml-6 font-medium" onClick={() => navigate("/doctorpanel")}>Appointment</button>
-                            <div className="ml-14 w-10"> <span className="font-semibold text-lg">Consultation Fee-</span>${fee}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>*/}
-            {/**<div>
-                <div className="w-auto p-6 rounded-lg flex shadow-3xl shadow-cyan-100 mt-9">
-                    <div className="w-40 h-40 bg-slate-300 rounded-full mt-6">
-                        <p className="text-7xl flex items-center justify-center translate-y-10">R</p>
-                    </div>
-                    <div className="ml-14 w-72 text-left">
-                        <p className="text-4xl font-semibold">Dr. Raghu Datta</p>
-                        <div><span className="font-semibold text-xl">Address-</span>HOUSE NO. 1111 VPOJSKNSK DISTT.  GFDGERE G.R  PIN CODE- 129493 INDIA  NEW DELHI</div>
-                        <div><span className="font-semibold text-xl">Reviews -</span>VERY GOOD APP</div>
-                        <div><span className="font-semibold text-xl">Years of Experience -</span> 5 YEARS</div>
-                        <div><span className="font-semibold text-xl">Speciality -</span> ENT , CARDIOLOGY</div>
-                        <div className="flex">
-                            <button className="p-1 border-2 bg-white w-36 rounded-md ml-6 font-medium" onClick={() => navigate("/doctorpanel")}>Appointment</button>
-                            <div className="ml-14 w-10"> <span className="font-semibold text-lg">Consultation Fee-</span>$299</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="w-auto p-6 rounded-lg flex shadow-3xl shadow-cyan-100 mt-9">
-                    <div className="w-40 h-40 bg-slate-300 rounded-full mt-6">
-                        <p className="text-7xl flex items-center justify-center translate-y-10">R</p>
-                    </div>
-                    <div className="ml-14 w-72 text-left">
-                        <p className="text-4xl font-semibold">Dr. Raghu Datta</p>
-                        <div><span className="font-semibold text-xl">Address-</span>HOUSE NO. 1111 VPOJSKNSK DISTT.  GFDGERE G.R  PIN CODE- 129493 INDIA  NEW DELHI</div>
-                        <div><span className="font-semibold text-xl">Reviews -</span>VERY GOOD APP</div>
-                        <div><span className="font-semibold text-xl">Years of Experience -</span> 5 YEARS</div>
-                        <div><span className="font-semibold text-xl">Speciality -</span> ENT , CARDIOLOGY</div>
-                        <div className="flex">
-                            <button className="p-1 border-2 bg-white w-36 rounded-md ml-6 font-medium" onClick={() => navigate("/doctorpanel")}>Appointment</button>
-                            <div className="ml-14 w-10"> <span className="font-semibold text-lg">Consultation Fee-</span>$299</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="w-auto p-6 rounded-lg flex shadow-3xl shadow-cyan-100 mt-9">
-                    <div className="w-40 h-40 bg-slate-300 rounded-full mt-6">
-                        <p className="text-7xl flex items-center justify-center translate-y-10">R</p>
-                    </div>
-                    <div className="ml-14 w-72 text-left">
-                        <p className="text-4xl font-semibold">Dr. Raghu Datta</p>
-                        <div><span className="font-semibold text-xl">Address-</span>HOUSE NO. 1111 VPOJSKNSK DISTT.  GFDGERE G.R  PIN CODE- 129493 INDIA  NEW DELHI</div>
-                        <div><span className="font-semibold text-xl">Reviews -</span>VERY GOOD APP</div>
-                        <div><span className="font-semibold text-xl">Years of Experience -</span> 5 YEARS</div>
-                        <div><span className="font-semibold text-xl">Speciality -</span> ENT , CARDIOLOGY</div>
-                        <div className="flex">
-                            <button className="p-1 border-2 bg-white w-36 rounded-md ml-6 font-medium" onClick={() => navigate("/doctorpanel")}>Appointment</button>
-                            <div className="ml-14 w-10"> <span className="font-semibold text-lg">Consultation Fee-</span>$299</div>
-                        </div>
-                    </div>
-                </div>
-            </div>*/}
         </> 
   );
 }
